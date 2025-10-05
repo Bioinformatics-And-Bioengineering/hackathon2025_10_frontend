@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Grid, Paper, Typography, Box, LinearProgress } from "@mui/material";
 import SummaryCard from "./SummaryCard.jsx";
 import CalendarView from "./CalendarView.jsx";
+import AvatarPanel from "./AvatarPanel.jsx";
 
 // "YYYY-MM" を生成（ローカル時刻基準）
 const getYearMonth = () => {
@@ -155,58 +156,14 @@ export default function Dashboard() {
       </Grid>
 
       {/* ▼ 育成アバター：1行専有（フル幅）かつコンテンツは中央寄せ */}
-      <Box sx={{ mt: 3 }}>
-        <Paper
-          sx={{
-            p: 2,
-            borderRadius: 3,
-            // 中のレイアウト
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center", // ← 中身を中央寄せ
-            gap: 3,
-            // カード自体の最大幅を調整して中央に
-            maxWidth: 900,
-            mx: "auto",
-          }}
-        >
-          {/* 💪 絵文字 */}
-          <Box
-            sx={{
-              width: 160,
-              height: 160,
-              borderRadius: 2,
-              display: "grid",
-              placeItems: "center",
-              fontSize: 96,
-              bgcolor: "background.default",
-              flexShrink: 0,
-            }}
-          >
-            💪
-          </Box>
-
-          {/* レベル／進捗 */}
-          <Box sx={{ minWidth: 260 }}>
-            <Typography variant="h6" sx={{ mb: 0.5 }}>
-              {loadingChar ? "読込中..." : `Lv.${charData.level} / 連続 ${charData.streak} 日`}
-            </Typography>
-            <Typography variant="body2">次のレベルまで</Typography>
-            <LinearProgress
-              variant="determinate"
-              value={
-                charData.next_threshold > 0
-                  ? Math.min(100, Math.round((charData.exp / charData.next_threshold) * 100))
-                  : 0
-              }
-              sx={{ mt: 0.5 }}
-            />
-            <Typography variant="caption">
-              {charData.exp} / {charData.next_threshold}
-            </Typography>
-          </Box>
-        </Paper>
-      </Box>
+      {/* ▼ 育成アバター：Dashboardは呼ぶだけ */}
+<Box sx={{ mt: 3 }}>
+  <AvatarPanel
+    character={charData}
+    saving={balance}       // ← 今月残高をそのまま渡す
+    loading={loadingChar}
+  />
+</Box>
 
       {/* ▼ カレンダー：1行専有（フル幅）かつカード幅を中央に */}
       <Box sx={{ mt: 3 }}>
