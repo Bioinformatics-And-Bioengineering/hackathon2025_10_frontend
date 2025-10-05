@@ -26,7 +26,14 @@ const SummaryCard = ({ title, amount, type }) => {
   // MUIのカラーシステムを適用するために、bgcolorプロパティで色の濃淡を指定
   // 例: primary.light, success.light, error.light
   return (
-    <Card sx={{ minWidth: 275, bgcolor: `${color}.light`, color: '#fff' }}>
+    <Card
+      sx={(theme) => ({
+        width: '100%',            // ★ グリッド幅いっぱいに
+        height: '100%',           // ★ カードの高さも揃えやすい
+        bgcolor: theme.palette[color]?.light,
+        color: theme.palette[color]?.contrastText || '#fff',
+      })}
+ >
       <CardContent>
         <Box display="flex" justifyContent="space-between" alignItems="center">
           {/* タイトル */}

@@ -141,6 +141,13 @@ const TransactionForm = () => {
           margin="normal"
           fullWidth
           required
+          slotProps={{
+          htmlInput: {
+            min: 0,
+            inputMode: 'numeric',
+            onFocus: (e) => e.currentTarget.select(), // ← フォーカスで全選択
+          },
+  }} 
         />
 
         {/* 日付 */}

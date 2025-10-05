@@ -1,8 +1,8 @@
 import * as React from "react";
 import { Box, Stack, Typography, LinearProgress } from "@mui/material";
-import dayjs from "dayjs";
-import { getState } from "../api/state";
-import { getCharacterImageBase64 } from "../api/character";
+// import dayjs from "dayjs";
+//import { getState } from "../api/state";
+//import { getCharacterImageBase64 } from "../api/character";
 
 /**
  * props:
